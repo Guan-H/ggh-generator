@@ -1,19 +1,22 @@
 package com.ggh;
 
+import com.ggh.generator.staticGenerator;
+
+import java.io.File;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+        //获取文件的根目录
+        String property = System.getProperty("user.dir");
+//        property += "\\generator-basic";   //如果可以生成在generator-basi目录就加上这个
+        System.out.println(property);
+        File projectPath = new File(property);
+        //输入路径：ACM示例代码模板目录
+        String inputPath = new File(projectPath, "generator-demo-project/acm-template").getAbsolutePath();
+        //输出路径：直接输出到项目的根目录
+        String outputPath = property;
+        staticGenerator.copyFilesByRecursive(inputPath,outputPath);
     }
 }
