@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-public class staticGenerator {
+public class StaticGenerator {
 
 
     /**

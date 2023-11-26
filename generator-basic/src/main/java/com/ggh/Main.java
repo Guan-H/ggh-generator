@@ -1,6 +1,6 @@
 package com.ggh;
 
-import com.ggh.generator.staticGenerator;
+import com.ggh.generator.StaticGenerator;
 
 import java.io.File;
 
@@ -17,6 +17,6 @@ public class Main {
         String inputPath = new File(projectPath, "generator-demo-project/acm-template").getAbsolutePath();
         //输出路径：直接输出到项目的根目录
         String outputPath = property;
-        staticGenerator.copyFilesByRecursive(inputPath,outputPath);
+        StaticGenerator.copyFilesByRecursive(inputPath,outputPath);
     }
 }
