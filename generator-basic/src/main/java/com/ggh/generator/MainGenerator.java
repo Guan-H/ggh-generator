@@ -24,23 +24,19 @@ public class MainGenerator {
         File parentFile = new File(projectPath).getParentFile();
         // 输入路径
         String inputPath = new File(parentFile, "ggh-generator/acm-template").getAbsolutePath();
-        System.out.println("inputPath :"+inputPath);
         String outputPath = projectPath+"/generator-basic";
-        System.out.println("outputPath = " + outputPath);
         // 生成静态文件
         StaticGenerator.copyFilesByRecursive(inputPath, outputPath);
 
         // 生成动态文件
-        String inputDynamicFilePath = projectPath + File.separator + "src/main/resources/templates/";
-        System.out.println("inputDynamicFilePath = " + inputDynamicFilePath);
-        String outputDynamicFilePath = outputPath + File.separator + "acm-template/src/com/yupi/acm/MainTemplate.java";
-        System.out.println("outputDynamicFilePath = " + outputDynamicFilePath);
-        GenerateUtils.doGenerate(inputDynamicFilePath, "MainTemplate.java.ftl",outputDynamicFilePath, model);
+        String inputDynamicFilePath = projectPath +"/generator-basic/"+ File.separator + "src/main/resources/templates/";
+        String outputDynamicFilePath = outputPath + File.separator + "acm-template/src/com/yupi/acm/";
+        GenerateUtils.doGenerate(inputDynamicFilePath, "mainTemplates.java.ftl",outputDynamicFilePath, model);
     }
 
     public static void main(String[] args) throws TemplateException, IOException {
         MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
-        mainTemplateConfig.setAuthor("yupi");
+        mainTemplateConfig.setAuthor("GGH");
         mainTemplateConfig.setLoop(false);
         mainTemplateConfig.setOutputText("求和结果：");
         Date date = new Date();

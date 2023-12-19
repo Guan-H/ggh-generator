@@ -24,7 +24,7 @@ public class ASCIIArt implements Runnable {
         // In this case, code for generation of ASCII art graphics
         // (omitted for the sake of brevity).
         String toString = words.toString();
-        System.out.println(fontSize+"-"+ words);
+        System.out.println(fontSize+"-"+ toString);
     }
 
     public static void main(String[] args) {
