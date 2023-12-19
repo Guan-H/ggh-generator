@@ -5,10 +5,11 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import org.apache.commons.lang3.StringUtils;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class GenerateUtils {
 
@@ -43,19 +44,22 @@ public class GenerateUtils {
 
         // 创建模板对象，加载指定模板
         String name = new File(templateName).getName();
-        System.out.println("模板名称:"+name);
-        Template template =  conf.getTemplate(templateName);
+        Template template =  conf.getTemplate(templateName,"utf-8");
 
         //生成
-        String outputFileName = templateName.replace(".ftl", ".");
+        String outputFileName = templateName.replace(".ftl", "");
         Writer  writer = null;
         if(StringUtils.isNotBlank(outputPath)){
-            writer = new FileWriter(outputPath+outputFileName);
+//            writer = new FileWriter(outputPath+outputFileName);
+            //指定输出流的字符集,不然会乱码
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputPath+outputFileName), "utf-8"));
+
         }else{
             //如果没传入输出路径，默认存放在resources目录
             String property = System.getProperty("user.dir")+"\\src\\main\\resources\\";
             System.out.println("文件路径："+property);
-            writer = new FileWriter(property+outputFileName);
+//            writer = new FileWriter(property+outputFileName);
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(property+outputFileName), "utf-8"));
         }
         template.process(model,writer);
         writer.close();
